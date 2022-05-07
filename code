@@ -1,0 +1,20 @@
+import json
+from pprint import pprint
+import numpy as np
+import pandas as pd
+
+with open('StreamingHistory0.json', 'r', encoding='utf-8') as f:
+    file_content = f.read()
+    templates = json.loads(file_content)
+pprint(templates)
+
+df = (pd
+      .json_normalize(music)
+     # .set_index(["artistName", "endTime", "msPlayed"])
+      .rename(columns=lambda c: c.replace("", "")))
+res = df
+print (res.tail(60))
+
+num_rows = res.shape[0]
+print('Number of Rows in DataFrame :',num_rows)
+
