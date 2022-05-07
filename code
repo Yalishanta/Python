@@ -13,8 +13,22 @@ df = (pd
      # .set_index(["artistName", "endTime", "msPlayed"])
       .rename(columns=lambda c: c.replace("", "")))
 res = df
-print (res.tail(60))
+print(res.tail(60))
 
 num_rows = res.shape[0]
 print('Number of Rows in DataFrame :',num_rows)
 
+dfe = (pd
+      .json_normalize(music)
+    #  .set_index(["artistName", "trackName"])
+      .rename(columns=lambda c: c.replace("", "")))
+ress = dfe
+print(ress)
+
+mus = ress.iloc[0:1]
+print(mus)
+
+print(ress.columns)
+DF_RM_DUP = ress.drop_duplicates(keep='first', subset=["artistName","trackName"])
+DF_RM_DUP.to_csv('file.csv')
+print(DF_RM_DUP)
